@@ -4,6 +4,7 @@ import com.example.demo.model.EmailData;
 import com.example.demo.model.PhoneData;
 import com.example.demo.model.User;
 import com.example.demo.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/users")
+@Valid
 public class UserController {
     private final UserService userService;
 

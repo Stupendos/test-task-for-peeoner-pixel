@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 
 import java.math.BigDecimal;
 
@@ -10,6 +11,9 @@ public class EmailData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Pattern(
+            regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+            message = "Invalid email format")
     private String email;
 
     @ManyToOne
@@ -47,5 +51,10 @@ public class EmailData {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void remove(EmailData email) {
+        this.email = email.getEmail();
+        this.user = null;
     }
 }

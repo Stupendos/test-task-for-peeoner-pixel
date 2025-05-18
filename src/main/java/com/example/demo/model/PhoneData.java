@@ -11,20 +11,20 @@ public class PhoneData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Pattern(
             regexp = "^\\+7\\d{10}$",
-            message = "The phone number must start with +7 and contain 10 digits"
+            message = "The phoneNumber number must start with +7 and contain 10 digits"
     )
-    private String phone;
+    private String phoneNumber;
 
-    public PhoneData(long id, User user, String phone) {
+    public PhoneData(long id, User user, String phoneNumber) {
         this.id = id;
         this.user = user;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
     }
 
     public PhoneData() {
@@ -48,28 +48,28 @@ public class PhoneData {
 
     public @Pattern(
             regexp = "^\\+7\\d{10}$",
-            message = "The phone number must start with +7 and contain 10 digits"
+            message = "The phoneNumber number must start with +7 and contain 10 digits"
     ) String getPhone() {
-        return phone;
+        return phoneNumber;
     }
 
     public void setPhone(@Pattern(
             regexp = "^\\+7\\d{10}$",
-            message = "The phone number must start with +7 and contain 10 digits"
-    ) String phone) {
-        this.phone = phone;
+            message = "The phoneNumber number must start with +7 and contain 10 digits"
+    ) String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PhoneData phoneData = (PhoneData) o;
-        return id == phoneData.id && Objects.equals(user, phoneData.user) && Objects.equals(phone, phoneData.phone);
+        PhoneData phoneNumberData = (PhoneData) o;
+        return id == phoneNumberData.id && Objects.equals(user, phoneNumberData.user) && Objects.equals(phoneNumber, phoneNumberData.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, phone);
+        return Objects.hash(id, user, phoneNumber);
     }
 }

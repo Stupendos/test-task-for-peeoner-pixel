@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "user_entity")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,22 +24,22 @@ public class User {
     @Size(min = 8, max = 500, message = "From 8 to 500 characters")
     private String password;
 
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PhoneData> phone;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmailData> emails;
+    private List<EmailData> email;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Account account;
 
-    public User(Long id, String name, LocalDate dateOfBirth, String password, List<PhoneData> phone, List<EmailData> emails, Account account) {
+    public User(Long id, String name, LocalDate dateOfBirth, String password, List<PhoneData> phone, List<EmailData> email, Account account) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.password = password;
         this.phone = phone;
-        this.emails = emails;
+        this.email = email;
         this.account = account;
     }
 
@@ -86,12 +86,12 @@ public class User {
         this.phone = phone;
     }
 
-    public List<EmailData> getEmails() {
-        return emails;
+    public List<EmailData> getEmail() {
+        return email;
     }
 
-    public void setEmails(List<EmailData> emails) {
-        this.emails = emails;
+    public void setEmail(List<EmailData> email) {
+        this.email = email;
     }
 
     public Account getAccount() {
@@ -103,7 +103,7 @@ public class User {
     }
 
     public void removeEmail(EmailData email) {
-        emails.remove(email);
+        email.remove(email);
         email.setUser(null);
     }
 }

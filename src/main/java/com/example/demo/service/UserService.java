@@ -42,7 +42,7 @@ public class UserService {
     public void deleteEmail(Long userId, Long emailId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
 
-        EmailData emailToRemove = user.getEmails().stream()
+        EmailData emailToRemove = user.getEmail().stream()
                 .filter(email -> email.getId().equals(emailId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Email not found"));
